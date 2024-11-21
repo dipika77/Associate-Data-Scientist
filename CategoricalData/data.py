@@ -43,3 +43,44 @@ series2 = pd.Series(list_of_occupations, dtype="category")
 # Print out the data type and number of bytes for series2
 print("series2 data type:", series2.dtype)
 print("series2 number of bytes:", series2.nbytes)
+
+
+
+
+#instruction
+'''Create a categorical pandas Series without using pd.Series().
+Specify the three known medal categories such that "Bronze" < "Silver" < "Gold".
+Specify that the order of the categories is important when creating this Series.'''
+
+# Create a categorical Series and specify the categories (let pandas know the order matters!)
+medals = pd.Categorical(medals_won, categories=["Bronze", "Silver", "Gold"], ordered=True)
+print(medals)
+
+
+
+#instruction
+'''Call the correct attribute on the adult DataFrame to review the data types.
+Create a dictionary with keys: "Workclass", "Education", "Relationship", and "Above/Below 50k".
+Set the value for each key to be "category".
+Use the newly created dictionary, adult_dtypes, when reading in adult.csv
+'''
+
+# Check the dtypes
+print(adult.dtypes)
+
+# Create a dictionary with column names as keys and "category" as values
+adult_dtypes = {
+   "Workclass": "category",
+   "Education": "category",
+   "Relationship": "category",
+   "Above/Below 50k": "category" 
+}
+
+# Read in the CSV using the dtypes parameter
+adult2 = pd.read_csv(
+  "adult.csv",
+  dtype = adult_dtypes
+  
+)
+print(adult2.dtypes)
+
