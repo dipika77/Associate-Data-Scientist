@@ -84,3 +84,37 @@ adult2 = pd.read_csv(
 )
 print(adult2.dtypes)
 
+
+
+
+#instructions
+'''Split the adult dataset across the "Sex" and "Above/Below 50k" columns, saving this object as gb.
+Print out the number of observations found in each group.
+Using gb, find the average of each numerical column.'''
+
+# Group the adult dataset by "Sex" and "Above/Below 50k"
+gb = adult.groupby(by=["Sex", "Above/Below 50k"])
+
+# Print out how many rows are in each created group
+print(gb.size())
+
+# Print out the mean of each group for all columns
+print(gb.mean())
+
+
+
+
+#instructions
+'''Create a list of the names for two user-selected variables: "Education" and "Above/Below 50k".
+Create a GroupBy object, gb, using the user_list as the grouping variables.
+Calculate the mean of "Hours/Week" across each group using the most efficient approach covered in the video.'''
+
+
+# Create a list of user-selected variables
+user_list = ["Education", "Above/Below 50k"] 
+
+# Create a GroupBy object using this list
+gb = adult.groupby(by=user_list)
+
+# Find the mean for the variable "Hours/Week" for each group - Be efficient!
+print(gb['Hours/Week'].mean())
