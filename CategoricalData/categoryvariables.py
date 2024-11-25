@@ -64,3 +64,50 @@ dogs["likes_children"] =  dogs["likes_children"].cat.rename_categories(lambda c:
 
 # Print the list of categories
 print(dogs['likes_children'].cat.categories)
+
+
+
+
+#instructions
+'''Create a dictionary named update_coats to map both wirehaired and medium-long to medium.
+Collapse the categories listed in this new dictionary and save this as a new column, coat_collapsed.
+Convert this new column into a categorical Series.
+Print the frequency table of this new Series.'''
+
+# Create the update_coats dictionary
+update_coats = {
+  "wirehaired": "medium",
+  "medium-long": "medium"
+}
+
+
+# Create a new column, coat_collapsed
+dogs["coat_collapsed"] = dogs["coat"].replace(update_coats)
+
+# Convert the column to categorical
+dogs["coat_collapsed"] = dogs["coat_collapsed"].astype("category")
+
+# Print the frequency table
+print(dogs["coat_collapsed"].value_counts())
+
+
+
+#Reordering categories
+#instructions
+
+'''Print out the current categories of the "size" pandas Series.
+Reorder categories in the "size" column using the categories "small", "medium", "large", do not set the ordered parameter.
+
+Update the reorder_categories() method so that pandas knows the variable has a natural order.
+
+Add a argument to the method so that the "size" column is updated without needing to save it to itself.'''
+
+# Print out the current categories of the size variable
+print(dogs["size"].cat.categories)
+
+# Reorder the categories, specifying the Series is ordinal, and overwriting the original series
+dogs["size"].cat.reorder_categories(
+  new_categories=["small", "medium", "large"],
+  ordered=True,
+  inplace = True
+)
