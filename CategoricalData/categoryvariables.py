@@ -111,3 +111,73 @@ dogs["size"].cat.reorder_categories(
   ordered=True,
   inplace = True
 )
+
+
+#instructions
+'''Print out the frequency table of "sex" for each category of the "size" column.
+Print out the frequency table of "keep_in" for each category of the "size" column.'''
+
+# Previous code
+dogs["size"].cat.reorder_categories(
+  new_categories=["small", "medium", "large"],
+  ordered=True,
+  inplace=True
+)
+
+# How many Male/Female dogs are available of each size?
+print(dogs.groupby("size")["sex"].value_counts())
+
+# Do larger dogs need more room to roam?
+print(dogs.groupby('size')['keep_in'].value_counts())
+
+
+
+#cleansing and accessing data
+#instructions
+'''Update the misspelled response "Malez" to be "male" by creating the replacement map, replace_map.
+Replace all occurrences of "Malez" with "male" by using replace_map.
+Remove the leading spaces of the " MALE" and " FEMALE" responses.
+Convert all responses to be strictly lowercase.
+Convert the "sex" column to a categorical pandas Series.'''
+
+# Fix the misspelled word
+replace_map = {"Malez": "male"}
+
+# Update the sex column using the created map
+dogs["sex"] = dogs["sex"].replace(replace_map)
+
+# Strip away leading whitespace
+dogs["sex"] = dogs["sex"].str.strip()
+
+# Make all responses lowercase
+dogs["sex"] = dogs["sex"].str.lower()
+
+# Convert to a categorical Series
+dogs["sex"] = dogs["sex"].astype("category")
+
+print(dogs["sex"].value_counts())
+
+
+
+
+#instructions
+'''Print the "coat" value for the dog with an ID of 23807
+For dogs with a long "coat", print the number of each "sex".
+
+Print the average age of dogs with a "breed" of "English Cocker Spaniel".
+
+Filter to the dogs with "English" in their "breed" name using the .contains() method.'''
+
+
+# Print the category of the coat for ID 23807
+print(dogs.loc[23807, "coat"])
+
+# Find the count of male and female dogs who have a "long" coat
+print(dogs.loc[dogs["coat"] == "long", "sex"].value_counts())
+
+# Print the mean age of dogs with a breed of "English Cocker Spaniel"
+print(dogs.loc[dogs['breed'] == 'English Cocker Spaniel','age' ].mean())
+
+# Count the number of dogs that have "English" in their breed name
+print(dogs["breed"].str.contains("English", regex=False).shape[0])
+
