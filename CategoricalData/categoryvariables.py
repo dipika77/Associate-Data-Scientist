@@ -181,3 +181,6 @@ print(dogs.loc[dogs['breed'] == 'English Cocker Spaniel','age' ].mean())
 # Count the number of dogs that have "English" in their breed name
 print(dogs["breed"].str.contains("English", regex=False).shape[0])
 
+
+
+
